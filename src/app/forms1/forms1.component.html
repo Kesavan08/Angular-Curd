@@ -1,0 +1,350 @@
+     <!--Enterier Class-->
+<div class="bg-slate-200 ">
+    <div class=" p-1 md:p-20 sm:p-2">
+    
+        <!--Start the Form-->
+    
+     <form [formGroup]="addressForm" #userForm="ngForm" novalidate (ngSubmit)="addUser(userForm.value)" class="justify-center md:p-2    0 sm:p-2">
+    
+        <!--Heading and Logo-->
+    
+        <div class="en-border">
+            <div class="bg-[#FF8FB1] justify-center flex relative p-2" cllass="justify-items-center">
+                 
+                <img src="assets/food_form_images.png" alt="">
+                <div class="relative flex justify-center items-center text-2xl text-[#937DC] ">
+                    Basic To-Go Order Form
+                </div>
+                
+            </div>
+        </div>
+    
+        <!--First Name and Last Name-->
+        
+        <div class="row">
+    
+            <div class="bg-[#FFFDD0] p-10">
+    
+                <!--Start the MatFormFiedl in FirstName-->
+    
+                <mat-form-field hintLabel="Min Length 10 Max Length 10" class=" w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 p-5" appearance="outline" color="primary">
+                    <mat-label> First Name</mat-label>
+    
+                     <!--FirstName Input-->
+                    
+                    <input matInput minlength="2"  maxlength="10" [(ngModel)]="user.firstname" type="text" placeholder="First" formControlName="firstname" required style="width: 100%;">
+                    
+    
+                    <!--FirstName Error-->
+    
+                    <mat-error *ngIf="addressForm.controls['firstname'].hasError('required')">
+                        First name is <strong>required</strong>
+                    </mat-error>
+                    
+                </mat-form-field>
+    
+                  <!--Start the MatFormFiedl in FirstName-->
+    
+                <mat-form-field hintLabel="Min Length 10 Max Length 10" class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 p-5" appearance="outline" color="primary">
+    
+                    <mat-label>Last Name</mat-label>
+    
+                    <!-- Last Name Input -->
+    
+                    <input matInput minlength="2" name="lastname" maxlength="10" [(ngModel)]="user.lastname" type="text" placeholder="last" formControlName="lastname" required>
+                     
+    
+                    <!-- LastName error -->
+                    <mat-error *ngIf="addressForm.controls['lastname'].hasError('required')">
+                        Last name is <strong>required</strong>
+                    </mat-error>
+                     
+    
+                </mat-form-field>
+                
+            
+    
+            <!-- Closed in Name field -->
+    
+            <div class=" ">
+                <!-- Address1  -->
+    
+            <mat-form-field class=" w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 p-5" appearance="outline" color="primary" >
+    
+                <mat-label>Address1</mat-label>
+    
+                <!-- input of address -->
+                <input matInput type="text" name="address1" [(ngModel)]="user.address1" placeholder="Address Line 1"formControlName="address1" required style="width: 500px; ">
+    
+                <!-- AddressLine 1 is error -->
+                <mat-error *ngIf="addressForm.controls['address1'].hasError('required')">
+                    Address Line 1 name is <strong>required</strong>
+                </mat-error>
+    
+            </mat-form-field>
+            <mat-form-field class=" w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 p-5" appearance="outline" color="primary" >
+    
+                <mat-label>Address1</mat-label>
+    
+                <!-- input of address -->
+                <input matInput type="text" [(ngModel)]="user.address2" name="address2" placeholder="Address Line 2"formControlName="address2" required style="width: 500px; ">
+    
+                <!-- AddressLine 1 is error -->
+                <mat-error *ngIf="addressForm.controls['address2'].hasError('required')">
+                    Address Line 2 name is <strong>required</strong>
+                </mat-error>
+    
+            </mat-form-field>
+    
+            
+    
+             
+        </div>
+    
+        <div class = "location">
+            <!-- locations for city pincode and state -->
+    
+            <mat-form-field class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 p-5" appearance="outline"color="primary">
+    
+                <mat-label>City</mat-label>
+    
+                <!-- input of City -->
+    
+                <input matInput type="text" name="city" [(ngModel)]="user.city" placeholder="City" formControlName="city" required>
+                <mat-icon matSuffix>person pin circle</mat-icon>
+    
+                <mat-error *ngIf="addressForm.controls['city'].hasError('required')">
+    
+                    <!-- Error massage of City -->
+    
+                    City name is <strong>required</strong>
+    
+                </mat-error>
+    
+            </mat-form-field>
+    
+            <mat-form-field class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 p-5"appearance="outline"color="primary">
+    
+                <mat-label>State</mat-label>    
+                    <!-- Selection Inputs -->
+                <mat-select formControlName="state" name="state" [(ngModel)]="user.state">
+                    <mat-option *ngFor="let state of states" [value]="state.abbreviation">{{state.name}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="addressForm.controls['city'].hasError('required')">
+    
+                    <!-- Error massage of State -->
+    
+                    State is <strong>required</strong>
+    
+                </mat-error>
+                <mat-icon matSuffix>home</mat-icon>
+    
+            </mat-form-field>
+    
+            <mat-form-field  hintLabel="Max 6 characters" class=" w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 p-5" appearance="outline"color="primary">
+    
+                <mat-label>Pincode</mat-label>
+    
+                <!-- input of pincode -->
+                
+                <input matInput maxlength=6 [(ngModel)]="user.pincode" name="pincode" type="number"  #input1 placeholder="PinCode"formControlName="pincode" required pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==6) return false;">
+                <mat-hint align="end">{{input1.value?.length || 0}}/6</mat-hint>
+                <mat-icon matSuffix>pincode</mat-icon>
+                <!-- Error massage of Pincode -->
+        
+                <mat-error *ngIf="addressForm.controls['pincode'].hasError('required')">
+                    Pincode name is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="addressForm.controls['pincode'].hasError('pattern')">
+                    Using Number
+                </mat-error>
+                
+            </mat-form-field>
+    
+            <mat-form-field  class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 p-5" appearance="outline"color="primary">
+    
+                <mat-label>Country</mat-label>
+    
+                <!-- input of pincode -->
+    
+                <input matInput type="text" [(ngModel)]="user.country"  placeholder="Country" formControlName="country" required>
+                
+                <!-- Error massage of Pincode -->
+    
+                <mat-error *ngIf="addressForm.controls['country'].hasError('required')">
+                    Country name is <strong>required</strong>
+                </mat-error>
+    
+            </mat-form-field>
+    
+        </div>
+        
+        <div class="phone_email">
+    
+            <mat-form-field  hintLabel="Max 10 characters" class=" w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 p-5" appearance="outline"color="primary">
+                
+                <mat-label>Phone</mat-label>
+    
+                <input matInput  maxlength=10 [(ngModel)]="user.mobile"  type="number" #input  placeholder="Phone" formControlName="mobile" required pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;">
+                <mat-icon matSuffix>phone</mat-icon>
+                <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+                <mat-error *ngIf="addressForm.controls['mobile'].hasError('required')">
+                    Phone name is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="addressForm.controls['mobile'].hasError('pattern')">
+                    Use a Number
+                </mat-error>
+    
+            </mat-form-field>
+    
+            <mat-form-field hintLabel="Enter valid email" class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 p-5" appearance="outline"color="warn">
+    
+                <mat-label>Email</mat-label>
+    
+                <input matInput type="text" [(ngModel)]="user.email" name="email" placeholder="Email"  formControlName="email" required>
+                <mat-icon matSuffix>mail</mat-icon>
+                <mat-error *ngIf="addressForm.controls['email'].hasError('required')">
+                    Email is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="addressForm.controls['email'].hasError('email')">
+                    Not Valid
+                </mat-error>
+    
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-label>Order Type   </mat-label>
+        <div class="order_type">
+          
+            <mat-radio-group aria-label="Select an option" color="primary">
+                <mat-radio-button value="1">Delivary</mat-radio-button>
+                <mat-radio-button value="2">Pick-up</mat-radio-button>
+              </mat-radio-group>
+        </div>
+    </div>  
+    </div>
+       
+        <div class="bg-[#FCE2DB] p-10">
+            <h4 class="text-3xl p-5">Order</h4>
+        
+            <button mat-fab color="warn" aria-label="Example icon button with a delete icon"(click)="hasUnitNumber = !hasUnitNumber">
+                <mat-icon>cancel</mat-icon>
+              </button>
+      
+          <div *ngIf="!hasUnitNumber">
+            <mat-form-field class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 p-5" appearance="outline"color="primary">
+                <mat-label>Appetizer</mat-label>    
+                <mat-select>
+                    <mat-option>Appetizer 1 Rs.5.00</mat-option>
+                    <mat-option>Appetizer 2 Rs.10.00</mat-option>
+                    <mat-option>Appetizer 3 Rs.15.00</mat-option>
+                </mat-select>
+            
+            </mat-form-field>
+    
+           
+            <mat-form-field class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 p-5" appearance="outline"color="primary">
+            <mat-label>Salads/Soups</mat-label>    
+                <mat-select>
+                    <mat-option>Salad   s/Soups 1 Rs.5.00</mat-option>
+                    <mat-option>Salads/Soups 2 Rs.10.00</mat-option>
+                    <mat-option>Salads/Soups 3 Rs.15.00</mat-option>
+                </mat-select>
+            </mat-form-field>
+             
+            <mat-form-field class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 p-5" appearance="outline"color="primary">
+                <mat-label>Enteers</mat-label>    
+                <mat-select>
+                    <mat-option>Enteers 1 Rs.10.00</mat-option>
+                    <mat-option>Enteers 2 Rs.20.00</mat-option>
+                    <mat-option>Enteers 3 Rs.30.00</mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 p-5" appearance="outline"color="primary">
+                <mat-label>Breveges</mat-label>             
+                    <mat-select>
+                        <mat-option>Breverges 1 Rs.15.00</mat-option>
+                        <mat-option>Breverges 1 Rs.30.00</mat-option>
+                        <mat-option>Breverges 1 Rs.45.00</mat-option>
+                    </mat-select>
+                
+            </mat-form-field>
+            <mat-form-field class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 p-5">
+                <textarea matInput placeholder="Special Instruction"></textarea>
+                <mat-icon matSuffix>feedback</mat-icon>
+              </mat-form-field>
+              <mat-form-field class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 p-5">
+                <textarea matInput placeholder="Special Instruction"></textarea>
+                <mat-icon matSuffix>feedback</mat-icon>
+              </mat-form-field>
+                
+                </div>
+          </div>
+        
+          
+     
+        <div >
+            <div class="bg-[#D3ECA7] p-10" >
+            <div class="button1">
+               <button mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon"(click)="hasUnitNumber = !hasUnitNumber">
+                   <mat-icon>add</mat-icon>
+                 </button>
+                 
+            </div>
+            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 p-5 pt-5">
+                <button mat-flat-button color="primary" width="50%" *ngIf="!isEdit" >Submit</button>
+                <button mat-flat-button color="primary" width="50%" *ngIf="isEdit"(click)="updateUsers()">Update</button>
+
+            </div>
+        </div>  
+           </div>
+           </div>
+      </form>
+    </div>
+</div>
+
+<div class="content-center">
+    <table class="mx-auto w-1/4 sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2">
+      <tr class="bg-emerald-200 hover:bg-slate-500">
+         <th class="border border-slate-300 ...">FirstName</th>
+         <th class="border border-slate-300 ...">LastName</th>
+         <th class="border border-slate-300 ...">Email</th>
+         <th class="border border-slate-300 ...">Mobile</th>
+         <th class="border border-slate-300 ...">Address 1</th>
+         <th class="border border-slate-300 ...">Address 2</th>
+         <th class="border border-slate-300 ...">City</th>
+         <th class="border border-slate-300 ...">State</th>
+         <th class="border border-slate-300 ...">Pincode</th>
+         <th class="border border-slate-300 ...">Country</th>
+      </tr>
+      <tr *ngFor="let user of users" class="bg-red-300 hover:bg-lime-200 ">
+    
+        <td class="border border-slate-300 ...">{{user.firstname}}</td> 
+        <td class="border border-slate-300 ...">{{user.lastname}}</td>
+        <td class="border border-slate-300 ...">{{user.email}}</td>
+        <td class="border border-slate-300 ...">{{user.mobile}}</td>
+        <td class="border border-slate-300 ...">{{user.address1}}</td>
+        <td class="border border-slate-300 ...">{{user.address2}}</td>
+        <td class="border border-slate-300 ...">{{user.city}}</td>
+        <td class="border border-slate-300 ...">{{user.state}}</td>
+        <td class="border border-slate-300 ...">{{user.pincode}}</td>
+        <td class="border border-slate-300 ...">{{user.country}}</td>
+        <td>
+        <div class="bg-white">
+          <button mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon"(click)="deleteUsers(user)" >
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-mini-fab color="primary" aria-label="Example icon button with a filter list icon"(click)="editUsers(user)">
+            <mat-icon>update</mat-icon>
+          </button>
+        </div>
+    </td>
+    </tr>
+    
+    </table> 
+    </div> 
+    
+
+
+
